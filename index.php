@@ -1,7 +1,7 @@
 <?php
 // var_dump($_POST);
 // exit();
-define('FILENAME', './data.txt');
+define('FILENAME', './data.csv');
 date_default_timezone_set('Asia/Tokyo');
 
 // 変数の初期化
@@ -33,7 +33,7 @@ if (!empty($_POST['btn_submit'])) {
   }
 
   if (empty($error_message)) {
-    /*
+    
     if ($file = fopen(FILENAME, "a")) {  // ファイルを開く 引数はa
 
       $now_date = date("Y-m-d H:i:s");  //日付の取得
@@ -50,30 +50,30 @@ if (!empty($_POST['btn_submit'])) {
 
       $success_message = 'メッセージを書き込みました。';
     }
-    */
-
-    $mysqli = new mysqli('localhost', 'root', 'password', 'board'); // データベースに接続
-    if ($mysqli->connect_errno) {
-      $error_message[] = '書き込みに失敗しました。 エラー番号 ' . $mysqli->connect_errno . ' : ' . $mysqli->connect_error;
-    } else {
-
-      $mysqli->set_charset('utf8'); //文字コード取得
-
-      $now_date = date("Y-m-d H:i:s"); //日時取得
-
-      //insert sql
-      $sql = "INSERT INTO message (name, message, post_date) VALUES ( '$clean[name]', '$clean[message]', '$now_date')";
     
-      $res = $mysqli->query($sql); //データを登録
 
-      if($res) {
-        $success_message = 'メッセージを書き込みました。';
-      } else {
-        $error_message[] = '書き込みに失敗しました。';
-      }
+    // $mysqli = new mysqli('localhost', 'root', '', 'board'); // データベースに接続
+    // if ($mysqli->connect_errno) {
+    //   $error_message[] = '書き込みに失敗しました。 エラー番号 ' . $mysqli->connect_errno . ' : ' . $mysqli->connect_error;
+    // } else {
 
-      $mysqli->close(); //dbをclose
-    }
+    //   $mysqli->set_charset('utf8'); //文字コード取得
+
+    //   $now_date = date("Y-m-d H:i:s"); //日時取得
+
+    //   //insert sql
+    //   $sql = "INSERT INTO message (name, message, post_date) VALUES ( '$clean[name]', '$clean[message]', '$now_date')";
+    
+    //   $res = $mysqli->query($sql); //データを登録
+
+    //   if($res) {
+    //     $success_message = 'メッセージを書き込みました。';
+    //   } else {
+    //     $error_message[] = '書き込みに失敗しました。';
+    //   }
+
+    //   $mysqli->close(); //dbをclose
+    // }
   }
 }
 // flock($file, LOCK_EX); // ファイルをロック
